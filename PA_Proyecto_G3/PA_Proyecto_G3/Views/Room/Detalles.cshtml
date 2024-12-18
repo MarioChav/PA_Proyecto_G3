@@ -1,0 +1,65 @@
+﻿@model PA_Proyecto_G3.Models.Sala
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<center><h2>Detalles</h2></center>
+
+<div>
+    <h4>Sala</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Disponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ubicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraDisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraDisponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraIndisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraIndisponible)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>

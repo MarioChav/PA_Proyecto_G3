@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PA_Proyecto_G3.Models.Reservacion>
+
+@{
+    ViewBag.Title = "Lista de reservaciones";
+}
+
+<!-- Calendario de Reservas -->
+<center><h1>Calendario de Reservas</h1></center>
+<div id="calendar"></div>
+<br />
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" />
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var selectedEvent = null; // Variable para almacenar el evento seleccionado
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: '/Reservation/GetEvents',
+            headerToolbar: {
+                left: 'prev,next today reservarButton editarButton eliminarButton',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            customButtons: {
+                reservarButton: {
+                    text: 'Reservar',
+                    click: function () {
+                        window.location.href = '@Url.Action("Crear", "Reservation")';
+                    }
+                },
+                editarButton: {
+                    text: 'Modificar',
+                    click: function () {
+                        if (selectedEvent && selectedEvent.id) {
+                            window.location.href = '@Url.Action("Editar", "Reservation")/' + selectedEvent.id;
+                        } else {
+                            alert('Por favor selecciona una reservación.');
+                        }
+                    }
+                },
+                eliminarButton: {
+                    text: 'Cancelar',
+                    click: function () {
+                        if (selectedEvent) {
+                            if (confirm('¿Estás seguro de que deseas cancelar esta reservación?')) {
+                                // Redirige a la acción de eliminación, pasando el ID del evento seleccionado
+                                window.location.href = '@Url.Action("Eliminar", "Reservation")/' + selectedEvent.id;
+                            }
+                        } else {
+                            alert('Por favor selecciona una reservación.');
+                        }
+                    }
+                }
+            },
+            eventColor: 'green',
+            eventTimeFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: false
+            },
+            eventClick: function (info) {
+                selectedEvent = info.event; // Guarda el evento seleccionado
+                console.log(selectedEvent); // Verifica que el evento tiene el `id`
+                if (selectedEvent.id) {
+                    info.el.style.backgroundColor = '#ff0000';
+                } else {
+                    alert('La reservación seleccionada no tiene un ID válido.');
+                }
+            }
+        });
+
+        calendar.render();
+    });
+    </script>
+}

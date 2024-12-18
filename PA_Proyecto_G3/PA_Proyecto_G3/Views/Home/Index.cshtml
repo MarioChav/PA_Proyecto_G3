@@ -22,7 +22,7 @@
                     <p class="card-text">
                         Permite a los empleados visualizar la disponibilidad de salas de reuniones en tiempo real y realizar reservas de manera rápida y sencilla.
                     </p>
-                    <a href="#" class="btn btn-outline-dark">Explorar más &raquo;</a>
+                    <a href="@Url.Action("Index", "Reservar", new { Reservation = "valor" })" class="btn btn-outline-dark">Explorar más &raquo;</a>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <p class="card-text">
                         Los empleados pueden gestionar sus reservas existentes, modificar horarios o cancelar reservas según sea necesario.
                     </p>
-                    <a href="#" class="btn btn-outline-dark">Ver detalles &raquo;</a>
+                    <a href="@Url.Action("Index", "Room")" class="btn btn-outline-dark">Ver detalles &raquo;</a>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <p class="card-text">
                         Los administradores pueden gestionar las salas, supervisar las reservas y acceder a estadísticas de uso para optimizar la disponibilidad.
                     </p>
-                    <a href="#" class="btn btn-outline-dark">Más información &raquo;</a>
+                    <a href="@Url.Action("SalaUso", "Admin")" class="btn btn-outline-dark">Más información &raquo;</a>
                 </div>
             </div>
         </div>

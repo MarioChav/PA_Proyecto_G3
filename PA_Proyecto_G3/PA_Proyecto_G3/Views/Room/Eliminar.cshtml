@@ -1,0 +1,70 @@
+﻿@model PA_Proyecto_G3.Models.Sala
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<center><h3>Estás seguro que quieres eliminarlo?</h3></center>
+<div>
+    <h4>Sala</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Disponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ubicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraDisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraDisponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraIndisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraIndisponible)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

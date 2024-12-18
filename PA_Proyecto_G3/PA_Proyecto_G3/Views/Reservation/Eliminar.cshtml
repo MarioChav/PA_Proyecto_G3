@@ -1,0 +1,70 @@
+﻿@model PA_Proyecto_G3.Models.Reservacion
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<center><h2>Eliminar Reservación</h2></center>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaReservacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaReservacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiempoInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiempoInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiempoFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiempoFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sala.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sala.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Nombre)
+        </dd>
+        <br />
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Eliminar" class="btn btn-secondary" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

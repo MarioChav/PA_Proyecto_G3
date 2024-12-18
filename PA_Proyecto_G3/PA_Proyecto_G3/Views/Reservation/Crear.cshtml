@@ -1,0 +1,75 @@
+﻿@model PA_Proyecto_G3.Models.Reservacion
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+<center><h2>Reservación</h2></center>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.RoomId, "Salas disponibles", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("RoomId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RoomId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, "Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Id",null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaReservacion, "Fecha de Reservación", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.FechaReservacion, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.FechaReservacion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.TiempoInicio, "Hora de Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TiempoInicio, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.TiempoInicio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.TiempoFinal, "Hora de Finalización", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TiempoFinal, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.TiempoFinal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <!-- Campo de estatus oculto -->
+    @Html.HiddenFor(model => model.Estatus)
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-secondary" />
+        </div>
+    </div>
+</div>
+}
+<br />
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

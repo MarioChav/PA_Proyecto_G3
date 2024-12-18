@@ -8,7 +8,7 @@ namespace PA_Proyecto_G3.Controllers
 {
     public class HomeController : Controller
     {
-        //Prueba de programa
+        [Authorize]
         public ActionResult Index()
         {
             return View();

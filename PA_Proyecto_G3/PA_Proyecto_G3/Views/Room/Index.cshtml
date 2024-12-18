@@ -1,0 +1,85 @@
+﻿@model IEnumerable<PA_Proyecto_G3.Models.Sala>
+
+@{
+    ViewBag.Title = "Listado de Salas";
+}
+
+<center><h2>Listado de salas disponibles para reservas</h2></center>
+
+<br />
+<!-- Filtra la capacidad existente y equipamiento (Proyector, Pizarra, Monitor);-->
+<form method="get" action="@Url.Action("Index")">
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="capacidad">Capacidad mínima</label>
+            <input type="number" id="capacidad" name="capacidad" class="form-control" placeholder="Capacidad mínima" />
+        </div>
+        <div class="col-md-6">
+            <label for="equipamiento">Equipamiento</label>
+            <input type="text" id="equipamiento" name="equipamiento" class="form-control" placeholder="Buscar equipamiento" />
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
+
+<br />
+<p>
+    @Html.ActionLink("Crear sala", "Crear", null, new { @class = "btn btn-success" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capacidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraDisponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraIndisponible)
+        </th>
+        <th>
+            Acciones brindadas
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disponible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ubicacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraDisponible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraIndisponible)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.RoomId }) |
+                @Html.ActionLink("Detalles", "Detalles", new { id = item.RoomId }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.RoomId })
+            </td>
+        </tr>
+    }
+</table>

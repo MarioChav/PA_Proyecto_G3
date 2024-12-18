@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PA_Proyecto_G3.Models.Reservacion>
+
+@{
+    ViewBag.Title = "Mostrar Listado de Reservas";
+}
+
+<center><h2>Mostrar Listado de Reservas</h2></center>
+
+<!-- Mostrar mensaje de éxito o error -->
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["MensajeExito"]
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.RoomId)</th>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.FechaReservacion)</th>
+        <th>@Html.DisplayNameFor(model => model.TiempoInicio)</th>
+        <th>@Html.DisplayNameFor(model => model.TiempoFinal)</th>
+        <th>@Html.DisplayNameFor(model => model.Estatus)</th>
+        <th>Acciones disponibles</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.RoomId)</td>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.FechaReservacion)</td>
+            <td>@Html.DisplayFor(modelItem => item.TiempoInicio)</td>
+            <td>@Html.DisplayFor(modelItem => item.TiempoFinal)</td>
+            <td>@Html.DisplayFor(modelItem => item.Estatus)</td>
+            <td>
+                @Html.ActionLink("Modificar", "ModificarReserva", new { id = item.ReservacionId }) |
+                @Html.ActionLink("Cancelar", "CancelarReserva", new { id = item.ReservacionId })
+            </td>
+        </tr>
+    }
+
+</table>

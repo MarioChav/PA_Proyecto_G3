@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Uso de Salas";
+}
+
+<center><h2>Estadisticas Del Uso De Salas</h2></center>
+
+<canvas id="roomUsageChart" width="400" height="200"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('@Url.Action("GetRoomUsageData")')
+                .then(response => response.json())
+                .then(data => {
+                    const roomNames = data.map(item => item.Sala);
+                    const roomHours = data.map(item => item.TotalHoras);
+                    const roomReservations = data.map(item => item.Reservas);
+
+                    const ctx = document.getElementById('roomUsageChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: roomNames,
+                            datasets: [
+                                {
+                                    label: 'Total de Horas',
+                                    data: roomHours,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Número de Reservaciones',
+                                    data: roomReservations,
+                                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    grid: {
+                                        display: true,
+                                        color: 'rgba(200, 200, 200, 0.3)',
+                                        lineWidth: 1
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        display: true,
+                                        color: 'rgba(200, 200, 200, 0.3)',
+                                        lineWidth: 1
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        color: '#333'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error("Error obteniendo datos: ", error));
+        });
+    </script>
+}

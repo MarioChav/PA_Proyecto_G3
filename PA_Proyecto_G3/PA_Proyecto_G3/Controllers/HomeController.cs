@@ -8,6 +8,7 @@ namespace PA_Proyecto_G3.Controllers
 {
     public class HomeController : Controller
     {
+        //Prueba de programa
         public ActionResult Index()
         {
             return View();

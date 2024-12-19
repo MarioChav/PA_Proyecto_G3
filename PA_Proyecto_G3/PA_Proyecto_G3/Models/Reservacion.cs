@@ -16,8 +16,10 @@ namespace PA_Proyecto_G3.Models
         public int RoomId { get; set; }
         public Sala Sala { get; set; }
 
-        [ForeignKey("Usuario")]  
-        public int UsuarioId { get; set; }
+        [Required]
+        [ForeignKey("ApplicationUser")]
+        public string Id { get; set; } // El campo Id en AspNetUsers es de tipo string.
+        public ApplicationUser ApplicationUser { get; set; }
 
         [Required]
         public DateTime FechaReservacion { get; set; }

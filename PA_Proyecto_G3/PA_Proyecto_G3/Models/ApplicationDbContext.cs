@@ -28,8 +28,7 @@ namespace PA_Proyecto_G3.Models
         public DbSet<Equipamiento> Equipamiento { get; set; }
 
         public DbSet<SalasEquipamiento> SalasEquipamiento { get; set; }
-
-        public DbSet<Usuario> Usuarios { get; set; }
+        public IEnumerable ApplicationUser { get; internal set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,7 +38,6 @@ namespace PA_Proyecto_G3.Models
             modelBuilder.Entity<Reservacion>().ToTable("Reservacion");
             modelBuilder.Entity<Equipamiento>().ToTable("Equipamiento");
             modelBuilder.Entity<SalasEquipamiento>().ToTable("SalasEquipamiento");
-            modelBuilder.Entity<Usuario>().ToTable("Usuario");
         }
     }
 }

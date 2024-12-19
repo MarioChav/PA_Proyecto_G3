@@ -12,6 +12,7 @@ namespace PA_Proyecto_G3.Controllers
     {
         private ApplicationDbContext context = new ApplicationDbContext();
 
+        [Authorize(Roles = "Administrador")]
         // GET: Admin
         public ActionResult Index()
         {
@@ -33,6 +34,7 @@ namespace PA_Proyecto_G3.Controllers
             return Json(roomUsage, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult SalaUso()
         {
             return View();

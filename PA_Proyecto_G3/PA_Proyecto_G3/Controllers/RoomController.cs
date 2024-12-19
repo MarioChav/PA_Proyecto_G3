@@ -15,6 +15,8 @@ namespace PA_Proyecto_G3.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        [Authorize(Roles = "Administrador")]
         // GET: Room
         public ActionResult Index(int? capacidad, string equipamiento)
         {

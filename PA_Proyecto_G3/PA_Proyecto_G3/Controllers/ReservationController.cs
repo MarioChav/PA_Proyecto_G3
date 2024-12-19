@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 
 namespace PA_Proyecto_G3.Controllers
-{   
+{
     public class ReservationController : Controller
     {
         private ApplicationDbContext context = new ApplicationDbContext();
 
+        [Authorize(Roles = "Usuario")]
         // GET: Reservation
         public ActionResult Index()
         {
@@ -46,9 +47,35 @@ namespace PA_Proyecto_G3.Controllers
         [HttpGet]
         public ActionResult Crear()
         {
+
+            var usuarios = context.Users
+             .Select(u => new
+                 {
+                     u.Id,
+                     u.Nombre,
+                     u.Apellidos
+                 })
+             .ToList(); 
+            
+            
+            // Carga los datos en memoria
+            var usuariosDescifrados = usuarios.Select(u => new
+            {
+                u.Id,
+                Nombre = Decrypt(u.Nombre) + " " + Decrypt(u.Apellidos)
+            }).ToList();
+
+            ViewBag.Id = new SelectList(
+             usuariosDescifrados,
+             "Id",
+             "Nombre"
+            );
+
             ViewBag.RoomID = new SelectList(context.Sala, "RoomID", "Nombre");
-            ViewBag.Id = new SelectList(context.ApplicationUser, "Id", "Nombre");
+
             return View();
+
+        
         }
 
         [HttpPost]
@@ -116,7 +143,28 @@ namespace PA_Proyecto_G3.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.RoomID = new SelectList(context.Sala, "RoomID", "Nombre", reservacion.RoomId);
-            ViewBag.UsuarioID = new SelectList(context.ApplicationUser, "Id", "Nombre", reservacion.Id);
+            var usuarios = context.Users
+            .Select(u => new
+            {
+                u.Id,
+                u.Nombre,
+                u.Apellidos
+            })
+            .ToList();
+
+
+            // Carga los datos en memoria
+            var usuariosDescifrados = usuarios.Select(u => new
+            {
+                u.Id,
+                Nombre = Decrypt(u.Nombre) + " " + Decrypt(u.Apellidos)
+            }).ToList();
+
+            ViewBag.Id = new SelectList(
+             usuariosDescifrados,
+             "Id",
+             "Nombre"
+            );
             return View(reservacion);
         }
 
@@ -218,5 +266,13 @@ namespace PA_Proyecto_G3.Controllers
             return RedirectToAction("MostraListado");
         }
 
+        public string Decrypt(string encryptedValue)
+        {
+            // Implementación de descifrado
+            return encryptedValue; 
+        }
+
     }
 }
+
+
